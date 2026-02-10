@@ -1,78 +1,63 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $nama }}</title>
+@extends('layouts.app')
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-        }
+@section('title', $nama)
 
-        header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
+@section('content')
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 15px;
-        }
+<!-- HERO SECTION -->
+<section class="hero text-center">
+    <div class="container">
+        <img src="{{ asset('assets/Logo_Resmi_PCR.png') }}" width="120" class="mb-4">
+        <h1 class="fw-bold">{{ $nama }}</h1>
+        <p class="lead fst-italic">{{ $slogan }}</p>
+    </div>
+</section>
 
-        th, td {
-            border: 1px solid #ccc;
-            padding: 10px;
-            text-align: left;
-        }
+<!-- CONTENT -->
+<div class="container my-5">
 
-        th {
-            background-color: #f2f2f2;
-        }
+    <!-- VISI & MISI -->
+    <div class="row g-4 mb-4">
+        <div class="col-md-6">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h4 class="card-title text-primary">Visi</h4>
+                    <p>{{ $visi }}</p>
+                </div>
+            </div>
+        </div>
 
-        tr:hover {
-            background-color: #f9f9f9;
-        }
-    </style>
-</head>
-<body>
+        <div class="col-md-6">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h4 class="card-title text-primary">Misi</h4>
+                    <ul>
+                        @foreach ($misi as $item)
+                            <li>{{ $item }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <header>
-        <img src="{{ asset($logo) }}" alt="Logo {{ $nama }}" width="150">
-        <h1>{{ $nama }}</h1>
-        <p><strong>Slogan:</strong> {{ $slogan }}</p>
-    </header>
-
-    <main>
-        <section>
-            <h2>Visi</h2>
-            <p>{{ $visi }}</p>
-        </section>
-
-        <section>
-            <h2>Misi</h2>
-            <ul>
-                @foreach ($misi as $item)
-                    <li>{{ $item }}</li>
-                @endforeach
-            </ul>
-        </section>
-
-        <section>
-            <h2>Deskripsi</h2>
-            @foreach ($deskripsi as $paragraf)
-                <p>{{ $paragraf }}</p>
+    <!-- DESKRIPSI -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <h4 class="card-title text-primary">Tentang Kami</h4>
+            @foreach ($deskripsi as $p)
+                <p>{{ $p }}</p>
             @endforeach
-        </section>
+        </div>
+    </div>
 
-        <!-- 🔽 BAGIAN BARU: DAFTAR PROGRAM STUDI -->
-        <section>
-            <h2>Daftar Program Studi</h2>
+    <!-- PROGRAM STUDI -->
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h4 class="card-title text-primary mb-3">Program Studi</h4>
 
-            <table>
-                <thead>
+            <table class="table table-striped table-hover">
+                <thead class="table-primary">
                     <tr>
                         <th>Nama Program Studi</th>
                         <th>Status</th>
@@ -82,14 +67,19 @@
                     @foreach ($prodi as $p)
                         <tr>
                             <td>{{ $p['nama'] }}</td>
-                            <td>{{ $p['status'] }}</td>
+                            <td>
+                                <span class="badge {{ $p['status'] === 'Unggulan' ? 'bg-success' : 'bg-secondary' }}">
+                                    {{ $p['status'] }}
+                                </span>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
-        </section>
 
-    </main>
+        </div>
+    </div>
 
-</body>
-</html>
+</div>
+
+@endsection
