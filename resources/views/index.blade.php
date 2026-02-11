@@ -1,66 +1,3 @@
-@extends('layouts.app')
-
-@section('title', $nama)
-
-@section('content')
-
-<!-- HEADER -->
-<div class="text-center mb-5">
-    <img src="{{ asset($logo) }}" alt="Logo {{ $nama }}" width="150" class="mb-3">
-    <h1 class="fw-bold">{{ $nama }}</h1>
-    <p class="text-muted fst-italic">{{ $slogan }}</p>
-</div>
-
-<!-- VISI -->
-<div class="mb-4">
-    <h3 class="fw-semibold">Visi</h3>
-    <p>{{ $visi }}</p>
-</div>
-
-<!-- MISI -->
-<div class="mb-4">
-    <h3 class="fw-semibold">Misi</h3>
-    <ul>
-        @foreach ($misi as $item)
-            <li>{{ $item }}</li>
-        @endforeach
-    </ul>
-</div>
-
-<!-- DESKRIPSI -->
-<div class="mb-4">
-    <h3 class="fw-semibold">Deskripsi</h3>
-    @foreach ($deskripsi as $paragraf)
-        <p>{{ $paragraf }}</p>
-    @endforeach
-</div>
-
-<!-- DAFTAR PROGRAM STUDI -->
-<div class="mb-5">
-    <h3 class="fw-semibold">Daftar Program Studi</h3>
-
-    <table class="table table-bordered table-hover mt-3">
-        <thead class="table-light">
-            <tr>
-                <th>Nama Program Studi</th>
-                <th>Status</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($prodi as $p)
-                <tr>
-                    <td>{{ $p['nama'] }}</td>
-                    <td>
-                        <span class="badge {{ $p['status'] == 'Unggulan' ? 'bg-success' : 'bg-secondary' }}">
-                            {{ $p['status'] }}
-                        </span>
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
-</div>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -196,5 +133,3 @@
 </body>
 
 </html>
-
-@endsection

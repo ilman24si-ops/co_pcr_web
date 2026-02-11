@@ -5,7 +5,7 @@
     <title>@yield('title', 'Politeknik Caltex Riau')</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Bootstrap CSS -->
+    <!-- Bootstrap CSS CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
@@ -14,7 +14,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container">
         <a class="navbar-brand fw-bold d-flex align-items-center" href="/">
-            <img src="{{ asset('assets/Logo_Resmi_PCR.png') }}" width="40" class="me-2">
+            <img src="{{ asset('assets/logo_pcr.png') }}" width="40" class="me-2">
             PCR
         </a>
     </div>
@@ -30,7 +30,7 @@
     <small>© {{ date('Y') }} Politeknik Caltex Riau</small>
 </footer>
 
-<!-- Bootstrap JS -->
+<!-- Bootstrap JS CDN -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
