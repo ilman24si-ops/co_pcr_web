@@ -9,6 +9,8 @@
     <img src="{{ asset($logo) }}" alt="Logo {{ $nama }}" width="150" class="mb-3">
     <h1 class="fw-bold">{{ $nama }}</h1>
     <p class="text-muted fst-italic">{{ $slogan }}</p>
+    <li><a href="{{ route('kunjungan.index') }}">Kunjungan</a></li>
+
 </div>
 
 <!-- VISI -->

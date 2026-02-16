@@ -1,95 +1,67 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Form Kunjungan - PCR</title>
+    <meta charset="UTF-8">
+    <title>List Kunjungan Kampus</title>
 
-  <!-- Vendor CSS -->
-  <link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
-  <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
 </head>
-
 <body>
 
-<header class="header fixed-top">
-  <div class="container d-flex justify-content-between align-items-center">
-      <h3>Politeknik Caltex Riau</h3>
-      <nav>
-          <a href="/">Home</a> |
-          <a href="{{ route('kunjungan.form') }}">Kunjungan</a>
-      </nav>
-  </div>
-</header>
+<div class="container mt-5">
 
-<main class="main" style="margin-top:100px;">
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-lg-6">
+    <h2 class="mb-4">List Data Kunjungan Kampus</h2>
 
-        <div class="card shadow p-4">
+    {{-- Alert sukses --}}
+    @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
 
-          <h3 class="text-center mb-4">Form Pendaftaran Kunjungan Kampus</h3>
+    <a href="{{ route('kunjungan.create') }}" class="btn btn-primary mb-3">
+    + Tambah Kunjungan
+</a>
 
-          {{-- Pesan sukses --}}
-          @if(session('success'))
-            <div class="alert alert-success">
-              {{ session('success') }}
+    <div class="card shadow">
+        <div class="card-body">
+
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama</th>
+                        <th>Email</th>
+                        <th>Institusi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse($kunjungans as $k)
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $k->nama }}</td>
+                            <td>{{ $k->email }}</td>
+                            <td>{{ $k->institusi }}</td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="4" class="text-center">
+                                Belum ada data kunjungan
+                            </td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
+
+            {{-- Pagination --}}
+            <div class="mt-3">
+                {{ $kunjungans->links() }}
             </div>
-          @endif
-
-          <form action="{{ route('kunjungan.store') }}" method="POST">
-            @csrf
-
-            <!-- Nama -->
-            <div class="mb-3">
-              <label class="form-label">Nama</label>
-              <input type="text" name="nama" class="form-control @error('nama') is-invalid @enderror" value="{{ old('nama') }}">
-              @error('nama')
-                <div class="invalid-feedback">
-                  {{ $message }}
-                </div>
-              @enderror
-            </div>
-
-            <!-- Email -->
-            <div class="mb-3">
-              <label class="form-label">Email</label>
-              <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}">
-              @error('email')
-                <div class="invalid-feedback">
-                  {{ $message }}
-                </div>
-              @enderror
-            </div>
-
-            <!-- Institusi -->
-            <div class="mb-3">
-              <label class="form-label">Institusi</label>
-              <input type="text" name="institusi" class="form-control @error('institusi') is-invalid @enderror" value="{{ old('institusi') }}">
-              @error('institusi')
-                <div class="invalid-feedback">
-                  {{ $message }}
-                </div>
-              @enderror
-            </div>
-
-            <!-- Tombol -->
-            <div class="text-center">
-              <button type="submit" class="btn btn-primary w-100">
-                Kirim Pendaftaran
-              </button>
-            </div>
-
-          </form>
 
         </div>
-
-      </div>
     </div>
-  </div>
-</main>
 
-<script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+</div>
+
 </body>
 </html>

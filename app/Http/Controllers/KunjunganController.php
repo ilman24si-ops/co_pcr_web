@@ -7,31 +7,32 @@ use App\Models\Kunjungan;
 
 class KunjunganController extends Controller
 {
-    public function create()
+    // HALAMAN LIST KUNJUNGAN
+    public function index()
     {
-        return view('kunjungan');
+        $kunjungans = Kunjungan::latest()->paginate(10);
+        return view('kunjungan', compact('kunjungans')); // file: resources/views/kunjungan.blade.php
     }
 
+    // HALAMAN FORM
+    public function create()
+    {
+        return view('form'); // file: resources/views/form.blade.php
+    }
+
+    // SIMPAN DATA
     public function store(Request $request)
     {
-        // ✅ VALIDASI
         $validated = $request->validate([
-            'nama'      => 'required|string|max:255',
-            'email'     => 'required|email|max:255',
+            'nama' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
             'institusi' => 'required|string|max:255',
-        ], [
-            'nama.required'      => 'Nama wajib diisi.',
-            'email.required'     => 'Email wajib diisi.',
-            'email.email'        => 'Format email tidak valid.',
-            'institusi.required' => 'Institusi wajib diisi.',
         ]);
 
-        // ✅ SIMPAN KE DATABASE
         Kunjungan::create($validated);
 
-        // ✅ REDIRECT DENGAN PESAN SUKSES
-        return redirect()
-                ->route('kunjungan.form')
-                ->with('success', 'Pendaftaran berhasil!');
+        // Redirect ke halaman list kunjungan
+        return redirect()->route('kunjungan.index')
+            ->with('success', 'Data berhasil disimpan!');
     }
 }

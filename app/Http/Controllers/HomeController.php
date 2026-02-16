@@ -52,6 +52,6 @@ class HomeController extends Controller
             ]
         ];
 
-        return view('index', $data);
+        return view('home', $data);
     }
 }
