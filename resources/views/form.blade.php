@@ -21,62 +21,70 @@
 
     <div class="card shadow">
         <div class="card-body">
-        <form action="{{ route('kunjungan.store') }}" method="POST">
-        @csrf
-                @csrf
+        <form action="{{ route('kunjungan.store') }}" method="POST" enctype="multipart/form-data">
+            @csrf
 
-                {{-- Nama --}}
-                <div class="mb-3">
-                    <label class="form-label">Nama</label>
-                    <input type="text" name="nama"
-                        class="form-control @error('nama') is-invalid @enderror"
-                        value="{{ old('nama') }}">
+            {{-- Nama --}}
+            <div class="mb-3">
+                <label class="form-label">Nama</label>
+                <input type="text" name="nama"
+                    class="form-control @error('nama') is-invalid @enderror"
+                    value="{{ old('nama') }}">
+                @error('nama')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
 
-                    @error('nama')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
+            {{-- Email --}}
+            <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input type="email" name="email"
+                    class="form-control @error('email') is-invalid @enderror"
+                    value="{{ old('email') }}">
+                @error('email')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
 
-                {{-- Email --}}
-                <div class="mb-3">
-                    <label class="form-label">Email</label>
-                    <input type="email" name="email"
-                        class="form-control @error('email') is-invalid @enderror"
-                        value="{{ old('email') }}">
+            {{-- Institusi --}}
+            <div class="mb-3">
+                <label class="form-label">Institusi</label>
+                <input type="text" name="institusi"
+                    class="form-control @error('institusi') is-invalid @enderror"
+                    value="{{ old('institusi') }}">
+                @error('institusi')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
 
-                    @error('email')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
+            {{-- Foto --}}
+            <div class="mb-3">
+                <label class="form-label">Foto (opsional)</label>
+                <input type="file" name="foto"
+                    class="form-control @error('foto') is-invalid @enderror"
+                    accept="image/png, image/jpeg, image/jpg">
+                @error('foto')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
 
-                {{-- Institusi --}}
-                <div class="mb-3">
-                    <label class="form-label">Institusi</label>
-                    <input type="text" name="institusi"
-                        class="form-control @error('institusi') is-invalid @enderror"
-                        value="{{ old('institusi') }}">
+            <button type="submit" class="btn btn-primary">
+                Kirim
+            </button>
 
-                    @error('institusi')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
+            <a href="{{ route('kunjungan') }}" class="btn btn-secondary">
+                Lihat Data
+            </a>
 
-                <button type="submit" class="btn btn-primary">
-                    Kirim
-                </button>
-
-                <a href="{{ route('kunjungan.index') }}" class="btn btn-secondary">
-                    Lihat Data
-                </a>
-
-            </form>
-
+        </form>
         </div>
     </div>
 

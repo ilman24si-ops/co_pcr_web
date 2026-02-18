@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use App\Models\Kunjungan; // 🔽 Import model Kunjungan
 
 class HomeController extends Controller
 {
@@ -27,29 +28,17 @@ class HomeController extends Controller
             'slogan'    => 'Empowers You to Global Competition',
             'logo'      => 'assets/Logo_Resmi_PCR.png',
 
-            // 🔽 DATA BARU: DAFTAR PROGRAM STUDI
+            // DAFTAR PROGRAM STUDI
             'prodi' => [
-                [
-                    'nama' => 'Teknik Informatika',
-                    'status' => 'Unggulan'
-                ],
-                [
-                    'nama' => 'Sistem Informasi',
-                    'status' => 'Unggulan'
-                ],
-                [
-                    'nama' => 'Teknik Elektronika',
-                    'status' => 'Reguler'
-                ],
-                [
-                    'nama' => 'Teknik Mesin',
-                    'status' => 'Reguler'
-                ],
-                [
-                    'nama' => 'Akuntansi',
-                    'status' => 'Reguler'
-                ],
-            ]
+                ['nama' => 'Teknik Informatika', 'status' => 'Unggulan'],
+                ['nama' => 'Sistem Informasi', 'status' => 'Unggulan'],
+                ['nama' => 'Teknik Elektronika', 'status' => 'Reguler'],
+                ['nama' => 'Teknik Mesin', 'status' => 'Reguler'],
+                ['nama' => 'Akuntansi', 'status' => 'Reguler'],
+            ],
+
+            // 🔽 5 Kunjungan Terbaru
+            'kunjungans' => Kunjungan::latest()->take(5)->get()
         ];
 
         return view('home', $data);

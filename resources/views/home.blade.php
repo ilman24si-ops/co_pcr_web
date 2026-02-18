@@ -9,7 +9,11 @@
     <img src="{{ asset($logo) }}" alt="Logo {{ $nama }}" width="150" class="mb-3">
     <h1 class="fw-bold">{{ $nama }}</h1>
     <p class="text-muted fst-italic">{{ $slogan }}</p>
-    <li><a href="{{ route('kunjungan.index') }}">Kunjungan</a></li>
+   <a href="{{ route('kunjungan') }}" class="btn btn-primary">
+    Kunjungan
+</a>
+
+
 
 </div>
 
@@ -62,6 +66,31 @@
         </tbody>
     </table>
 </div>
+
+<!-- 5 Kunjungan Terbaru -->
+<section id="kunjungan" class="section">
+    <div class="container">
+        <h2>5 Kunjungan Terbaru</h2>
+        <div class="row">
+            @forelse($kunjungans as $kunjungan)
+            <div class="col-md-4 mt-3">
+                <div class="card p-3">
+                    <h5>{{ $kunjungan->nama }}</h5>
+                    <p>Email: {{ $kunjungan->email }}</p>
+                    <p>Institusi: {{ $kunjungan->institusi }}</p>
+                    @if($kunjungan->foto)
+                        <img src="{{ asset('storage/' . $kunjungan->foto) }}" alt="Foto {{ $kunjungan->nama }}" class="img-fluid mt-2">
+                    @endif
+                    <small class="text-muted">Didaftarkan: {{ $kunjungan->created_at->format('d M Y') }}</small>
+                </div>
+            </div>
+            @empty
+            <p>Belum ada data kunjungan.</p>
+            @endforelse
+        </div>
+    </div>
+</section>
+
 
 <!DOCTYPE html>
 <html lang="en">
