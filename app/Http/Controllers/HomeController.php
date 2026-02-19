@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use App\Models\Kunjungan; // 🔽 Import model Kunjungan
+use App\Models\Kunjungan;
 
 class HomeController extends Controller
 {
@@ -37,7 +37,7 @@ class HomeController extends Controller
                 ['nama' => 'Akuntansi', 'status' => 'Reguler'],
             ],
 
-            // 🔽 5 Kunjungan Terbaru
+            // 5 Kunjungan Terbaru
             'kunjungans' => Kunjungan::latest()->take(5)->get()
         ];
 

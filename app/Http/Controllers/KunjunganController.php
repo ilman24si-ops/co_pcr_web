@@ -11,8 +11,16 @@ class KunjunganController extends Controller
     public function index()
     {
         $kunjungans = Kunjungan::latest()->paginate(10);
+        
+        // Tambahkan data yang diperlukan untuk header
+        $data = [
+            'nama' => 'Politeknik Caltex Riau',
+            'slogan' => 'Empowers You to Global Competition',
+            'logo' => 'assets/Logo_Resmi_PCR.png',
+            'kunjungans' => $kunjungans
+        ];
 
-        return view('kunjungan', compact('kunjungans')); // pakai satu view saja
+        return view('kunjungan', $data); // pakai satu view saja
     }
 
     // SIMPAN DATA dari form di halaman yang sama

@@ -2,62 +2,35 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>@yield('title', 'Politeknik Caltex Riau')</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@yield('title', $nama ?? 'PCR')</title>
 
-    <!-- Bootstrap -->
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-
-
-    <!-- Custom Style -->
-    <style>
-        body {
-            background-color: #f8f9fa;
-        }
-
-        /* Pagination kecil & modern */
-        .pagination {
-            font-size: 0.8rem;
-        }
-
-        .page-link {
-            padding: 4px 8px;
-            border-radius: 6px !important;
-        }
-
-        .pagination svg {
-            width: 14px;
-            height: 14px;
-        }
-
-    </style>
-
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet">
+    
+    @stack('styles')
 </head>
 <body>
 
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
-    <div class="container">
-        <a class="navbar-brand fw-semibold" href="/">
-            PCR
-        </a>
+    {{-- HEADER --}}
+    @include('partial.header')
 
-       
-    </div>
-</nav>
+    {{-- CONTENT HALAMAN --}}
+    <main class="pt-5"> {{-- pt-5 agar konten tidak tertutup header fixed --}}
+        @yield('content')
+    </main>
 
-<!-- Content -->
-<div class="container py-5">
-    @yield('content')
-</div>
-
-<!-- Footer -->
-<footer class="bg-dark text-white text-center py-3 mt-5">
-    <small>© {{ date('Y') }} Politeknik Caltex Riau</small>
-</footer>
-
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    @stack('scripts')
 </body>
 </html>
